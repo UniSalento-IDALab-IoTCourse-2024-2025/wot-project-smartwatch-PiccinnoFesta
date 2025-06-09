@@ -118,7 +118,7 @@ class HeartRateService : Service(), SensorEventListener {
     """.trimIndent()
 
         val request = Request.Builder()
-            .url("http://192.168.1.43:3000/api/data")
+            .url("http://192.168.1.39:3000/api/data")
             .post(jsonBody.toRequestBody(jsonMediaType))
             .build()
 
