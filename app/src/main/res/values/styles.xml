@@ -1,0 +1,6 @@
+<!-- styles.xml -->
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- personalizzazioni, se vuoi -->
+    </style>
+</resources>
