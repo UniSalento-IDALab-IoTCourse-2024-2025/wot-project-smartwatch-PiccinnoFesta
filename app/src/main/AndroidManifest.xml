@@ -42,6 +42,16 @@
             android:exported="true"
             android:foregroundServiceType="health"/>
 
+        <service
+            android:name="com.example.iotprojectwatch1.presentation.SensorService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="health"/>
+        <service
+            android:name="com.example.iotprojectwatch1.presentation.SensorBufferService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="health"/>
     </application>
 
 </manifest>

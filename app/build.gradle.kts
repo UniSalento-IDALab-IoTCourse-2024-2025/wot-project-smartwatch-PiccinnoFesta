@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    kotlin("plugin.serialization") version "1.8.20"
+
 }
 
 android {
@@ -56,7 +58,7 @@ dependencies {
 
     // HEALTH CONNECT: Questa è l'API raccomandata per l'integrazione con Health Connect.
     // Ho rimosso la vecchia "health-services-client" per evitare conflitti e usare l'API più moderna.
-   // implementation("androidx.health.connect:connect-client:1.1.0")
+    // implementation("androidx.health.connect:connect-client:1.1.0")
 
     implementation ("androidx.localbroadcastmanager:localbroadcastmanager:1.1.0")
 
@@ -66,4 +68,7 @@ dependencies {
     // OkHttp (REST Client)
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation(libs.appcompat)
+
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+
 }
