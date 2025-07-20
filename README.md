@@ -37,11 +37,44 @@ Il tutto è stato poi containerizzato tramite Docker.
 L'interfaccia web, esposta da un microservizio sul cloud, e sviluppata con React + Vite, permette l'accesso ai medici autorizzati nel sistema. Questi possono visualizzare le informazioni sui pazienti e gestirli nel database, nonchè visualizzare in una pagina dedicata, le statistiche sul tremore rilevato nel tempo per un determinato paziente.
 
 ## Repositories dei componenti
-- UserService: [UserService]([https://esempio.com](https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-UserService-PiccinnoFesta))
-- TremorAnalisys: [Tremor Analisys]([https://esempio.com](https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-TremorAnalysis-PiccinnoFesta))
-- SmartWatchService: [Smartwatch]([https://esempio.com](https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-smartwatch-PiccinnoFesta))
-- BLE server: [BLE Server]([http](https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-BLEserver-PiccinnoFesta))
-- Frontend: [Frontend]([http](https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-Frontend-PiccinnoFesta))
-  
+- UserService: [UserService](https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-UserService-PiccinnoFesta)
+- TremorAnalisys: [Tremor Analisys](https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-TremorAnalysis-PiccinnoFesta)
+- SmartWatchService: [Smartwatch](https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-smartwatch-PiccinnoFesta)
+- BLE server: [BLE Server](https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-BLEserver-PiccinnoFesta)
+- Frontend: [Frontend](https://github.com/UniSalento-IDALab-IoTCourse-2024-2025/wot-project-Frontend-PiccinnoFesta)
+
+## SmartWatchService
+
+Questo servizio, sviluppato per dispositivi wearable Android ha lo scopo di raccogliere dati di movimento inerziali tramite i  sensori e inviarli sfruttando il  Bluetooth Low Energy (BLE) a un dispositivo remoto. Il tutto avviene in background, grazie a un servizio in foreground che garantisce l’esecuzione continua e stabile anche a schermo spento.
+
+---
+
+# Funzionalità principali
+
+- Rilevamento e connessione automatica a dispositivi BLE con un `Service UUID` specifico.
+- Raccolta continua di dati dai sensori 
+- Invio dei dati in formato JSON via BLE a una caratteristica GATT.
+- Gestione delle sessioni tramite batch numerati per tracciare i progressi e categorizzare i pacchetti inviati in batch definiti.
+- Esecuzione in background con servizio foreground e WakeLock.
+
+
+## Come funziona
+
+All'avvio l'applicazione configura i permessi per l'esecuzione e garantisce che quest'ultima avvenga in background e non si
+interrompa.
+In seguito scansiona nelle vicinanze tramite BLE per trovare un dispositivo che esponga un `Service UUID` specifico, con cui poi si connette e inizia l'interazione GATT.
+Avviata questa interazione, cerca una caratteristica specifica su cui scrivere i dati e fornisce i JSON ottenuti, contenenti questi dati:
+- accelerometro
+- giroscopio
+- timestamp: orario in cui è ottenuto il dato
+- batchId: identificativo che accomuna più dati dello stesso batch.
+
+Per l'analisi di questi dati il progetto richiede batch da 400 campioni (snapshot), quindi il batchId serve proprio a permettere al dispositivo che riceve questi dati di ricostruire il pacchetto intero.
+
+Se la connesssione fallisce, dopo un breve delay tutta la sequenza riprende dall'inizio
+
+
+
+
 
 
